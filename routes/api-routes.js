@@ -3,9 +3,7 @@ const db = require("../models");
 module.exports = function(app) {
   // Get last workout.
   app.get('api/workouts', (req, res) => {
-    console.log("Request: ")
-    console.log(req)
-    db.Workout.find({}) // Missing query parameters
+    db.Workout.findOne({})
       .then(dbWorkout => {
         console.log(dbWorkout)
         res.json(dbWorkout)
@@ -17,9 +15,7 @@ module.exports = function(app) {
   })
   // Get last 7 workouts.
   app.get('api/workouts/range', (req, res) => {
-    console.log("Request: ")
-    console.log(req)
-    db.Workout.find({}) // Missing query parameters
+    db.Workout.find({}).limit(7)
       .then(dbWorkout => {
         console.log(dbWorkout)
         res.json(dbWorkout)
@@ -31,8 +27,6 @@ module.exports = function(app) {
   })
   // Create a new workout.
   app.post('/api/workouts', ({ body }, res) => {
-    console.log("Body: ")
-    console.log(body)
     db.Workout.create(body)
       .then(dbWorkout => {
         console.log(dbWorkout)
@@ -43,11 +37,8 @@ module.exports = function(app) {
   })
   // Modify current workout with new exercise.
   app.put('/api/workouts/:id', ({ body }, res) => {
-    // How do I get the id from the URL using { body } ?
-    console.log("Body: ")
-    console.log(body)
     db.Exercise.create(body)
-      .then(({ _id }) => db.Workout.findOneAndUpdate({}, // Missing query parameters
+      .then(({ _id }) => db.Workout.findOneAndUpdate({}, // How to get workout ID for query?
         { $push: { exercises: _id }}, { new: true }))
       .then(dbWorkout => {
         console.log(dbWorkout)
