@@ -3,15 +3,12 @@ const Schema = mongoose.Schema;
 
 const ExerciseSchema = new Schema({
   cardio: {
-    name: String,
-    distance: Number,
-    duration: Number
-  },
-  resistance: {
+    type: String,
     name: String,
     weight: Number,
     sets: Number,
     reps: Number,
+    distance: Number,
     duration: Number
   }
 });
