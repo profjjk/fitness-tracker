@@ -1,5 +1,10 @@
+// DEPENDENCIES
+// ====================================================
 const db = require("../models");
 
+
+// ROUTERS
+// ====================================================
 module.exports = function(app) {
   // Get last workout.
   app.get('api/workouts', (req, res) => {
@@ -13,6 +18,7 @@ module.exports = function(app) {
         res.json(err);
       });
   })
+  
   // Get last 7 workouts.
   app.get('api/workouts/range', (req, res) => {
     db.Workout.find({}).limit(7)
@@ -25,6 +31,7 @@ module.exports = function(app) {
         res.json(err);
       });
   })
+
   // Create a new workout.
   app.post('/api/workouts', ({ body }, res) => {
     db.Workout.create(body)
@@ -35,6 +42,7 @@ module.exports = function(app) {
         console.log(err)
       })
   })
+
   // Modify current workout with new exercise.
   app.put('/api/workouts/:id', ({ body }, res) => {
     db.Exercise.create(body)
