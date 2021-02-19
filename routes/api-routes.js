@@ -40,7 +40,7 @@ module.exports = function(app) {
       .then(newWorkout => {
         console.log("--- New Workout ---");
         console.log(newWorkout);
-        res.json({_id: newWorkout._id});
+        res.json({ _id: newWorkout._id });
       })
       .catch(err => {
         console.log(err);
@@ -51,7 +51,7 @@ module.exports = function(app) {
   app.put('/api/workouts/:id', (req, res) => {
     console.log('--- Add Exercise ---')
     console.log(req.body);
-    db.Workout.findOneAndUpdate({_id: req.params.id},
+    db.Workout.findOneAndUpdate({ _id: req.params.id },
       { $push: { exercises: req.body }}, { new: true })
       .then(updWorkout => {
         console.log('--- Updated Workout ---');
@@ -64,9 +64,3 @@ module.exports = function(app) {
       });
   });
 }
-
-// PROBLEMS
-// =================================================
-// 1. PUT route adds exercise to wrong workout. Need to target most recent workout by ID. How?
-// 2. GET routes do not work at all. Why?
-// 3. WTF is going on in the api.js file?!
