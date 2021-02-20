@@ -26,7 +26,7 @@ module.exports = function(app) {
       .then(weekWorkouts => {
         console.log("--- Last 7 Workouts ---");
         console.log(weekWorkouts);
-        res.json(weekWorkouts);
+        res.json(weekWorkouts.reverse());
       })
       .catch(err => {
         console.log(err);
